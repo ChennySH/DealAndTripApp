@@ -4,7 +4,7 @@ using System.Text;
 
 namespace DealAndTripApp.ViewModels
 {
-    class LoginPageViewModel : 
+    class LoginPageViewModel
     {
     }
 }
