@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 
 
-namespace DealAndTripApp.Models
+namespace DealAndTripServerBL.Models
 {
     public partial class Vacation
     {
@@ -24,6 +24,7 @@ namespace DealAndTripApp.Models
         public int EnterFlightId { get; set; }
         public int ExitFlightId { get; set; }
         public int NightsNumber { get; set; }
+        public int Price { get; set; }
 
         public virtual Flight EnterFlight { get; set; }
         public virtual Flight ExitFlight { get; set; }

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 
 
-namespace DealAndTripApp.Models
+namespace DealAndTripServerBL.Models
 {
     public partial class User
     {
@@ -10,8 +10,11 @@ namespace DealAndTripApp.Models
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string Email { get; set; }
-        public int Password { get; set; }
+        public string Password { get; set; }
         public int PhoneNumber { get; set; }
-        public int Price { get; set; }
+        public int? TravelAgentId { get; set; }
+
+        public virtual TravelAgent TravelAgentNavigation { get; set; }
+        public virtual TravelAgent TravelAgent { get; set; }
     }
 }

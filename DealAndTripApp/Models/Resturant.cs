@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 
 
-namespace DealAndTripApp.Models
+namespace DealAndTripServerBL.Models
 {
     public partial class Resturant
     {
