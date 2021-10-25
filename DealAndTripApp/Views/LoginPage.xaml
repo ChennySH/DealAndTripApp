@@ -5,9 +5,10 @@
     <ContentPage.Content>
         <StackLayout>
             <Label Text="UserName or Email:"></Label>
-            <Entry Placeholder="UserName/Email"/>
-            <Label Text="Password"/>
-            <Entry Placeholder="Password" IsPassword="True"/>
+            <Entry Placeholder="UserName/Email" Text="{Binding UserNameOrEmail}"/>
+            <Label Text="Password:"/>
+            <Entry Placeholder="Password" IsPassword="True" Text="{Binding Password}"/>
+            <Button Text="Submit" HorizontalOptions="Center"></Button>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

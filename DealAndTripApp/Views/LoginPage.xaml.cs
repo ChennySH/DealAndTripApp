@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DealAndTripApp.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -14,6 +15,7 @@ namespace DealAndTripApp.Views
     {
         public LoginPage()
         {
+            this.BindingContext = new LoginPageViewModel();
             InitializeComponent();
         }
     }

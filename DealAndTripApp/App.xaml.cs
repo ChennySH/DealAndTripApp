@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DealAndTripApp.Views;
+using System;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -6,11 +7,18 @@ namespace DealAndTripApp
 {
     public partial class App : Application
     {
+        public static bool IsDevEnv
+        {
+            get
+            {
+                return true; //change this before release!
+            }
+        }
         public App()
         {
             InitializeComponent();
 
-            MainPage = new MainPage();
+            MainPage = new LoginPage();
         }
 
         protected override void OnStart()
