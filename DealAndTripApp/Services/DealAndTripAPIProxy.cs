@@ -11,6 +11,7 @@ using System.Text.Encodings.Web;
 using Xamarin.Forms;
 using Xamarin.Essentials;
 using System.IO;
+using DealAndTripApp.DTO;
 
 namespace DealAndTripApp.Services
 {
@@ -82,35 +83,42 @@ namespace DealAndTripApp.Services
         public string GetBasePhotoUri() { return this.basePhotosUri; }
 
         //Login!
-        //public async Task<User> LoginAsync(string email, string pass)
-        //{
-        //    try
-        //    {
-        //        HttpResponseMessage response = await this.client.GetAsync($"{this.baseUri}/Login?email={email}&pass={pass}");
-        //        if (response.IsSuccessStatusCode)
-        //        {
-        //            JsonSerializerOptions options = new JsonSerializerOptions
-        //            {
-        //                ReferenceHandler = ReferenceHandler.Preserve, //avoid reference loops!
-        //                PropertyNameCaseInsensitive = true
-        //            };
-        //            string content = await response.Content.ReadAsStringAsync();
-        //            User u = JsonSerializer.Deserialize<User>(content, options);
-        //            return u;
-        //        }
-        //        else
-        //        {
-        //            return null;
-        //        }
-        //    }
-        //    catch (Exception e)
-        //    {
-        //        Console.WriteLine(e.Message);
-        //        return null;
-        //    }
-        //}
+        public async Task<User> LoginAsync(string userNameOrEmail, string password)
+        {
+            try
+            {
+                LoginDTO loginDTO = new LoginDTO 
+                { 
+                    UserNameOrEmail = userNameOrEmail, 
+                    Password = password 
+                };
+                string loginDTOJson = JsonSerializer.Serialize(loginDTO);
+                StringContent loginDTOJsonContent = new StringContent(loginDTOJson, Encoding.UTF8, "application/json");
+                HttpResponseMessage response = await this.client.PostAsync($"{this.baseUri}/Login",loginDTOJsonContent);
+                if (response.IsSuccessStatusCode)
+                {
+                    JsonSerializerOptions options = new JsonSerializerOptions
+                    {
+                        ReferenceHandler = ReferenceHandler.Preserve, //avoid reference loops!
+                        PropertyNameCaseInsensitive = true
+                    };
+                    string content = await response.Content.ReadAsStringAsync();
+                    User u = JsonSerializer.Deserialize<User>(content, options);
+                    return u;
+                }
+                else
+                {
+                    return null;
+                }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+                return null;
+            }
+        }
 
-        
+
 
         //Upload file to server (only images!)
         //public async Task<bool> UploadImage(Models.FileInfo fileInfo, string targetFileName)

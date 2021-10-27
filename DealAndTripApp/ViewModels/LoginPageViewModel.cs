@@ -19,7 +19,42 @@ namespace DealAndTripApp.ViewModels
         {
             userNameOrEmail = "";
             password = "";
+            SubmitCommand = new Command(Submit);
         }
+
+        private async void Submit()
+        {
+            DealAndTripAPIProxy proxy = DealAndTripAPIProxy.CreateProxy();
+            try
+            {
+                User u = await proxy.LoginAsync(UserNameOrEmail, Password);
+                if (u != null)
+                    ((App)App.Current).currentUser = u;
+                else
+                    ErrorMessege = "Somthing went wrong";
+            }
+            catch (Exception)
+            {
+                ErrorMessege = "Somthing went wrong";
+            }
+        }
+        private string errorMessege;
+        public string ErrorMessege
+        {
+            get
+            {
+                return errorMessege;
+            }
+            set
+            {
+                if(errorMessege != value)
+                {
+                    errorMessege = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+
         private string userNameOrEmail;
         public string UserNameOrEmail
         {
@@ -52,6 +87,8 @@ namespace DealAndTripApp.ViewModels
                 }
             }
         }
-        public ICommand SubmitCommand { protected set; get; }
+        public ICommand SubmitCommand { get; set; }
+
+        
     }
 }

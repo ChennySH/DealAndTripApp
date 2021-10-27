@@ -2,11 +2,13 @@
 using System;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
+using DealAndTripApp.Models;
 
 namespace DealAndTripApp
 {
     public partial class App : Application
     {
+        public User currentUser;
         public static bool IsDevEnv
         {
             get
@@ -17,7 +19,7 @@ namespace DealAndTripApp
         public App()
         {
             InitializeComponent();
-
+            currentUser = null;
             MainPage = new LoginPage();
         }
 
