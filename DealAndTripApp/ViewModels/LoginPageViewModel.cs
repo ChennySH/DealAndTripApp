@@ -29,7 +29,10 @@ namespace DealAndTripApp.ViewModels
             {
                 User u = await proxy.LoginAsync(UserNameOrEmail, Password);
                 if (u != null)
-                    ((App)App.Current).currentUser = u;
+                {
+                    // ((App)App.Current).currentUser = u;
+                    ErrorMessege = $"{u.UserName} entered succesfully!";
+                }
                 else
                     ErrorMessege = "Somthing went wrong";
             }

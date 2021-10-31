@@ -7,7 +7,7 @@ namespace DealAndTripApp.Models
     {
         public City()
         {
-            VacationsCities = new HashSet<VacationsCity>();
+            VacationsCities = new List<VacationsCity>();
         }
 
         public int Id { get; set; }
@@ -15,6 +15,6 @@ namespace DealAndTripApp.Models
         public string Name { get; set; }
 
         public virtual Country Country { get; set; }
-        public virtual ICollection<VacationsCity> VacationsCities { get; set; }
+        public virtual List<VacationsCity> VacationsCities { get; set; }
     }
 }
