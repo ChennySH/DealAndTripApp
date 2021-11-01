@@ -118,7 +118,32 @@ namespace DealAndTripApp.Services
             }
         }
 
-
+        public async Task<bool> SignUpAsync(User user)
+        {
+            try
+            {
+                string userJson = JsonSerializer.Serialize(user);
+                StringContent userJsonContent = new StringContent(userJson, Encoding.UTF8, "application/json");
+                HttpResponseMessage response = await this.client.PostAsync($"{this.baseUri}/SignUp", userJsonContent);
+                if (response.IsSuccessStatusCode)
+                {
+                    JsonSerializerOptions options = new JsonSerializerOptions
+                    {
+                        ReferenceHandler = ReferenceHandler.Preserve, //avoid reference loops!
+                        PropertyNameCaseInsensitive = true
+                    };
+                    string content = await response.Content.ReadAsStringAsync();
+                    bool isExist = JsonSerializer.Deserialize<bool>(content, options);
+                    return isExist;
+                }
+                else
+                    return false;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+        }
 
         //Upload file to server (only images!)
         //public async Task<bool> UploadImage(Models.FileInfo fileInfo, string targetFileName)
