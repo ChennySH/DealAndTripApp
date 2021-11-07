@@ -3,10 +3,32 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="DealAndTripApp.Views.SignUpPage">
     <ContentPage.Content>
+        <ScrollView>
         <StackLayout>
-            <Label Text="Welcome to Xamarin.Forms!"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
+
+            <Label Text="User Name: "/>
+            <Entry Placeholder="UserName" Text="{Binding UserName}"/>
+            
+            <Label Text="First Name: "/>
+            <Entry Placeholder="FirstName" Text="{Binding FirstName}"/>
+            
+            <Label Text="Last Name: "/>
+            <Entry Placeholder="LastName" Text="{Binding LastName}"/>
+            
+            <Label Text="Email: "/>
+            <Entry Placeholder="Email" Text="{Binding Email}"/>
+            
+            <Label Text="Password: "/>
+            <Entry Placeholder="Password" IsPassword="True" Text="{Binding Password}"/>
+            
+            <Label Text="Repeat Password: "/>
+            <Entry Placeholder="Repeat Password" Text="{Binding RepeatPassword}"/>
+            
+            <Label Text="Phone Number: "/>
+            <Entry Placeholder="Phone Number" Text="{Binding PhoneNumber}"/>
+            <Button Text="Sign Up" HorizontalOptions="Center" Command="{Binding RegisterCommand}"/>
+
         </StackLayout>
+        </ScrollView>
     </ContentPage.Content>
 </ContentPage>

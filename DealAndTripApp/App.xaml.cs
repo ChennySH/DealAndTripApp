@@ -20,7 +20,7 @@ namespace DealAndTripApp
         {
             InitializeComponent();
             currentUser = null;
-            MainPage = new LoginPage();
+            MainPage = new SignUpPage();
         }
 
         protected override void OnStart()
