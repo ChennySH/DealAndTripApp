@@ -134,7 +134,15 @@ namespace DealAndTripApp.Services
                     };
                     string content = await response.Content.ReadAsStringAsync();
                     bool isExist = JsonSerializer.Deserialize<bool>(content, options);
-                    return isExist;
+                    if (!isExist)
+                    {
+                        return true;
+                    }
+                    else
+                    {
+                        Exception existsException = new Exception("A user with the specifice values exist already");
+                        throw existsException;
+                    }
                 }
                 else
                     return false;

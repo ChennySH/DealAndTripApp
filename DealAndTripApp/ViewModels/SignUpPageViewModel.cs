@@ -55,6 +55,7 @@ namespace DealAndTripApp.ViewModels
             }
         }
         #region properties
+        #region UserName
         private string errorMessege;
         public string ErrorMessege
         {
@@ -87,7 +88,40 @@ namespace DealAndTripApp.ViewModels
                 }
             }
         }
-
+        private string userNameErrorMessege;
+        public string UserNameErrorMessege
+        {
+            get
+            {
+                return userNameErrorMessege;
+            }
+            set
+            {
+                if(userNameErrorMessege != value)
+                {
+                    userNameErrorMessege = value;
+                    OnPropertyChanged();
+                }
+            }   
+        }
+        private bool userNameErrorMessegeIsVisible;
+        public bool UserNameErrorMessegeIsVisible
+        {
+            get
+            {
+                return userNameErrorMessegeIsVisible;
+            }
+            set
+            {
+                if (userNameErrorMessegeIsVisible != value)
+                {
+                    userNameErrorMessegeIsVisible = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+        #endregion
+        #region FirstName
         private string firstName;
         public string FirstName
         {
@@ -104,6 +138,40 @@ namespace DealAndTripApp.ViewModels
                 }
             }
         }
+        private string firstNameErrorMessege;
+        public string FirstNameErrorMessege
+        {
+            get
+            {
+                return firstNameErrorMessege;
+            }
+            set
+            {
+                if (firstNameErrorMessege != value)
+                {
+                    firstNameErrorMessege = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+        private bool firstNameErrorMessegeIsVisible;
+        public bool FirstNameErrorMessegeIsVisible
+        {
+            get
+            {
+                return firstNameErrorMessegeIsVisible;
+            }
+            set
+            {
+                if (firstNameErrorMessegeIsVisible != value)
+                {
+                    firstNameErrorMessegeIsVisible = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+        #endregion
+        #region LastName
         private string lastName;
         public string LastName
         {
@@ -120,6 +188,40 @@ namespace DealAndTripApp.ViewModels
                 }
             }
         }
+        private string lastNameErrorMessege;
+        public string LastNameErrorMessege
+        {
+            get
+            {
+                return lastNameErrorMessege;
+            }
+            set
+            {
+                if (lastNameErrorMessege != value)
+                {
+                    lastNameErrorMessege = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+        private bool lastNameErrorMessegeIsVisible;
+        public bool LastNameErrorMessegeIsVisible
+        {
+            get
+            {
+                return lastNameErrorMessegeIsVisible;
+            }
+            set
+            {
+                if (LastNameErrorMessegeIsVisible != value)
+                {
+                    LastNameErrorMessegeIsVisible = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+        #endregion
+        #region Email
         private string email;
         public string Email
         {
@@ -136,6 +238,40 @@ namespace DealAndTripApp.ViewModels
                 }
             }
         }
+        private string emailErrorMessege;
+        public string EmailErrorMessege
+        {
+            get
+            {
+                return emailErrorMessege;
+            }
+            set
+            {
+                if (emailErrorMessege != value)
+                {
+                    emailErrorMessege = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+        private bool emailErrorMessegeIsVisible;
+        public bool EmailNameErrorMessegeIsVisible
+        {
+            get
+            {
+                return emailErrorMessegeIsVisible;
+            }
+            set
+            {
+                if (emailErrorMessegeIsVisible != value)
+                {
+                    emailErrorMessegeIsVisible = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+        #endregion
+        #region Password
         private string password;
         public string Password
         {
@@ -152,6 +288,40 @@ namespace DealAndTripApp.ViewModels
                 }
             }
         }
+        private string passwordErrorMessege;
+        public string PasswordErrorMessege
+        {
+            get
+            {
+                return passwordErrorMessege;
+            }
+            set
+            {
+                if (passwordErrorMessege != value)
+                {
+                    passwordErrorMessege = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+        private bool passwordErrorMessegeIsVisible;
+        public bool PasswordErrorMessegeIsVisible
+        {
+            get
+            {
+                return passwordErrorMessegeIsVisible;
+            }
+            set
+            {
+                if (passwordErrorMessegeIsVisible != value)
+                {
+                    passwordErrorMessegeIsVisible = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+        #endregion
+        #region RepeatPassword
         private string repeatPassword;
         public string RepeatPassword
         {
@@ -168,6 +338,40 @@ namespace DealAndTripApp.ViewModels
                 }
             }
         }
+        private string repeatPasswordErrorMessege;
+        public string RepeatPasswordErrorMessege
+        {
+            get
+            {
+                return repeatPasswordErrorMessege;
+            }
+            set
+            {
+                if (repeatPasswordErrorMessege != value)
+                {
+                    repeatPasswordErrorMessege = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+        private bool repeatPasswordErrorMessegeIsVisible;
+        public bool RepeatPasswordErrorMessegeIsVisible
+        {
+            get
+            {
+                return repeatPasswordErrorMessegeIsVisible;
+            }
+            set
+            {
+                if (repeatPasswordErrorMessegeIsVisible != value)
+                {
+                    repeatPasswordErrorMessegeIsVisible = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+        #endregion
+        #region PhoneNumber
         private string phoneNumber;
         public string PhoneNumber
         {
@@ -183,6 +387,90 @@ namespace DealAndTripApp.ViewModels
                     OnPropertyChanged();
                 }
             }
+        }
+        private string phoneNumberErrorMessege;
+        public string PhoneNumberErrorMessege
+        {
+            get
+            {
+                return phoneNumberErrorMessege;
+            }
+            set
+            {
+                if (phoneNumberErrorMessege != value)
+                {
+                    phoneNumberErrorMessege = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+        private bool phoneNumberErrorMessegeIsVisible;
+        public bool PhoneNumberErrorMessegeIsVisible
+        {
+            get
+            {
+                return phoneNumberErrorMessegeIsVisible;
+            }
+            set
+            {
+                if (phoneNumberErrorMessegeIsVisible != value)
+                {
+                    phoneNumberErrorMessegeIsVisible = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+        #endregion
+        #endregion
+        #region ValdationMethods
+        public bool ValidationAllValues()
+        {
+            return false;
+        }
+        public void UserNameValidation()
+        {
+            if (string.IsNullOrEmpty(UserName) || UserName.Length < 3)
+            {
+                UserNameErrorMessegeIsVisible = true;
+            }
+            else
+                UserNameErrorMessegeIsVisible = false;
+        }
+        public void FirstNameValidation()
+        {
+            FirstNameErrorMessegeIsVisible = string.IsNullOrEmpty(FirstName);
+        }
+        public void LastNameValidation()
+        {
+            LastNameErrorMessegeIsVisible = string.IsNullOrEmpty(lastName);
+        }
+        public void PhoneNumberValidation()
+        {
+            if (string.IsNullOrEmpty(PhoneNumber))
+            {
+                PhoneNumberErrorMessegeIsVisible = true;
+                return;
+            }
+            if (PhoneNumber.Length != 10)
+            {
+                PhoneNumberErrorMessegeIsVisible = true;
+                return;
+            }
+            if (!PhoneNumber.StartsWith("05"))
+            {
+                PhoneNumberErrorMessegeIsVisible = true;
+                return;
+            }
+            for (int i = 2; i < PhoneNumber.Length; i++)
+            {
+                char c = PhoneNumber[i];
+                if (c < '0' || c > '9')
+                {
+                    PhoneNumberErrorMessegeIsVisible = true;
+                    return;
+                }
+            }
+            PhoneNumberErrorMessegeIsVisible = false;
         }
         #endregion
         public ICommand RegisterCommand { get; set; }
