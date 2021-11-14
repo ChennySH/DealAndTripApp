@@ -133,16 +133,8 @@ namespace DealAndTripApp.Services
                         PropertyNameCaseInsensitive = true
                     };
                     string content = await response.Content.ReadAsStringAsync();
-                    bool isExist = JsonSerializer.Deserialize<bool>(content, options);
-                    if (!isExist)
-                    {
-                        return true;
-                    }
-                    else
-                    {
-                        Exception existsException = new Exception("A user with the specifice values exist already");
-                        throw existsException;
-                    }
+                    bool signedInSuccesfuly = JsonSerializer.Deserialize<bool>(content, options);
+                    return signedInSuccesfuly;                                   
                 }
                 else
                     return false;
@@ -152,6 +144,59 @@ namespace DealAndTripApp.Services
                 return false;
             }
         }
+        public async Task<bool> IsUserNameExistAsync(string userName)
+        {
+            try
+            {
+                string userNameJson = JsonSerializer.Serialize(userName);
+                StringContent userJsonContent = new StringContent(userNameJson, Encoding.UTF8, "application/json");
+                HttpResponseMessage response = await this.client.PostAsync($"{this.baseUri}/IsUserNameExist", userJsonContent);
+                if (response.IsSuccessStatusCode)
+                {
+                    JsonSerializerOptions options = new JsonSerializerOptions
+                    {
+                        ReferenceHandler = ReferenceHandler.Preserve, //avoid reference loops!
+                        PropertyNameCaseInsensitive = true
+                    };
+                    string content = await response.Content.ReadAsStringAsync();
+                    bool isExist = JsonSerializer.Deserialize<bool>(content, options);
+                    return isExist;
+                }
+                else
+                    return true;
+            }
+            catch (Exception)
+            {
+                return true;
+            }
+        }
+        public async Task<bool> IsEmailExistAsync(string email)
+        {
+            try
+            {
+                string emailJson = JsonSerializer.Serialize(email);
+                StringContent userJsonContent = new StringContent(email, Encoding.UTF8, "application/json");
+                HttpResponseMessage response = await this.client.PostAsync($"{this.baseUri}/IsEmailExist", userJsonContent);
+                if (response.IsSuccessStatusCode)
+                {
+                    JsonSerializerOptions options = new JsonSerializerOptions
+                    {
+                        ReferenceHandler = ReferenceHandler.Preserve, //avoid reference loops!
+                        PropertyNameCaseInsensitive = true
+                    };
+                    string content = await response.Content.ReadAsStringAsync();
+                    bool isExist = JsonSerializer.Deserialize<bool>(content, options);
+                    return isExist;
+                }
+                else
+                    return true;
+            }
+            catch (Exception)
+            {
+                return true;
+            }
+        }
+        
 
         //Upload file to server (only images!)
         //public async Task<bool> UploadImage(Models.FileInfo fileInfo, string targetFileName)

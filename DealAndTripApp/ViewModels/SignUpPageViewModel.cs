@@ -55,7 +55,6 @@ namespace DealAndTripApp.ViewModels
             }
         }
         #region properties
-        #region UserName
         private string errorMessege;
         public string ErrorMessege
         {
@@ -68,10 +67,12 @@ namespace DealAndTripApp.ViewModels
                 if (errorMessege != value)
                 {
                     errorMessege = value;
+
                     OnPropertyChanged();
                 }
             }
         }
+        #region UserName
         private string userName;
         public string UserName
         {
@@ -85,6 +86,7 @@ namespace DealAndTripApp.ViewModels
                 {
                     userName = value;
                     OnPropertyChanged();
+                    UserNameValidation();
                 }
             }
         }
@@ -135,6 +137,7 @@ namespace DealAndTripApp.ViewModels
                 {
                     firstName = value;
                     OnPropertyChanged();
+                    FirstNameValidation();
                 }
             }
         }
@@ -185,6 +188,7 @@ namespace DealAndTripApp.ViewModels
                 {
                     lastName = value;
                     OnPropertyChanged();
+                    LastNameValidation();
                 }
             }
         }
@@ -213,7 +217,7 @@ namespace DealAndTripApp.ViewModels
             }
             set
             {
-                if (LastNameErrorMessegeIsVisible != value)
+                if (lastNameErrorMessegeIsVisible != value)
                 {
                     LastNameErrorMessegeIsVisible = value;
                     OnPropertyChanged();
@@ -234,6 +238,7 @@ namespace DealAndTripApp.ViewModels
                 if (email != value)
                 {
                     email = value;
+                    EmailValidation();
                     OnPropertyChanged();
                 }
             }
@@ -255,7 +260,7 @@ namespace DealAndTripApp.ViewModels
             }
         }
         private bool emailErrorMessegeIsVisible;
-        public bool EmailNameErrorMessegeIsVisible
+        public bool EmailErrorMessegeIsVisible
         {
             get
             {
@@ -285,6 +290,7 @@ namespace DealAndTripApp.ViewModels
                 {
                     password = value;
                     OnPropertyChanged();
+                    EmailValidation();
                 }
             }
         }
@@ -425,39 +431,72 @@ namespace DealAndTripApp.ViewModels
         #region ValdationMethods
         public bool ValidationAllValues()
         {
-            return false;
+            UserNameValidation();
+            FirstNameValidation();
+            LastNameValidation();
+            EmailValidation();
+            PhoneNumberValidation();
+            PasswordValidation();
+            return (!(UserNameErrorMessegeIsVisible || FirstNameErrorMessegeIsVisible || 
+                LastNameErrorMessegeIsVisible || EmailErrorMessegeIsVisible || 
+                PhoneNumberErrorMessegeIsVisible || PasswordErrorMessegeIsVisible));
         }
         public void UserNameValidation()
         {
-            if (string.IsNullOrEmpty(UserName) || UserName.Length < 3)
+            if (string.IsNullOrEmpty(UserName) || UserName.Length < 2)
             {
+                UserNameErrorMessege = "UserName must have at least 2 letters";
                 UserNameErrorMessegeIsVisible = true;
             }
             else
+            {
+                UserNameErrorMessege = "";
                 UserNameErrorMessegeIsVisible = false;
+            }
         }
         public void FirstNameValidation()
         {
-            FirstNameErrorMessegeIsVisible = string.IsNullOrEmpty(FirstName);
+            if (string.IsNullOrEmpty(FirstName) || FirstName.Length < 2)
+            {
+                FirstNameErrorMessege = "Please enter a valid name";
+                FirstNameErrorMessegeIsVisible = true;
+            }
+            else
+            {
+                FirstNameErrorMessege = "";
+                FirstNameErrorMessegeIsVisible = false;
+            }
         }
         public void LastNameValidation()
         {
-            LastNameErrorMessegeIsVisible = string.IsNullOrEmpty(lastName);
+            if (string.IsNullOrEmpty(LastName) || LastName.Length < 2)
+            {
+                LastNameErrorMessege = "Please enter a valid name";
+                LastNameErrorMessegeIsVisible = true;
+            }
+            else
+            {
+                LastNameErrorMessege = "";
+                LastNameErrorMessegeIsVisible = false;
+            }
         }
         public void PhoneNumberValidation()
         {
             if (string.IsNullOrEmpty(PhoneNumber))
             {
+                PhoneNumberErrorMessege = "Please enter your phone number";
+                PhoneNumberErrorMessegeIsVisible = true;
+                return;
+            }            
+            if (!PhoneNumber.StartsWith("05"))
+            {
+                PhoneNumberErrorMessege = "Phone number must start with the digits 05";
                 PhoneNumberErrorMessegeIsVisible = true;
                 return;
             }
             if (PhoneNumber.Length != 10)
             {
-                PhoneNumberErrorMessegeIsVisible = true;
-                return;
-            }
-            if (!PhoneNumber.StartsWith("05"))
-            {
+                PhoneNumberErrorMessege = "Phone number must contain 10 digits";
                 PhoneNumberErrorMessegeIsVisible = true;
                 return;
             }
@@ -466,11 +505,50 @@ namespace DealAndTripApp.ViewModels
                 char c = PhoneNumber[i];
                 if (c < '0' || c > '9')
                 {
+                    PhoneNumberErrorMessege = "Phone number must contain valid digits";
                     PhoneNumberErrorMessegeIsVisible = true;
                     return;
                 }
             }
+            PhoneNumberErrorMessege = "";
             PhoneNumberErrorMessegeIsVisible = false;
+        }
+        public void EmailValidation()
+        {
+            if (string.IsNullOrEmpty(Email))
+            {
+                EmailErrorMessege = "Please enter your email";
+                EmailErrorMessegeIsVisible = true;
+                return;
+            }
+            if (Email.Contains("@") && !Email.StartsWith("@") && !Email.EndsWith("@"))
+            {
+                EmailErrorMessege = "Please enter a valid email";
+                EmailErrorMessegeIsVisible = true;
+                return;
+            }
+            EmailErrorMessege = "";
+            EmailErrorMessegeIsVisible = false;
+        }
+        public void PasswordValidation()
+        {
+            if (string.IsNullOrEmpty(Password) || UserName.Length < 8)
+            {
+                PasswordErrorMessege = "UserName must have at least 8 letters";
+                PasswordErrorMessegeIsVisible = true;
+            }
+            else
+            {
+                PasswordErrorMessege = "";
+                PasswordErrorMessegeIsVisible = false;
+            }
+        }
+        public void RepeatPasswordValidation()
+        {
+            if(RepeatPassword != Password)
+            {
+                RepeatPasswordErrorMessege = "The repeated password don't match to the password";
+            }
         }
         #endregion
         public ICommand RegisterCommand { get; set; }
