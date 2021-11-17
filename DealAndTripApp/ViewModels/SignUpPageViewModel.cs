@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Windows.Input;
+using DealAndTripApp.Views;
 using Xamarin.Forms;
 
 namespace DealAndTripApp.ViewModels
@@ -12,13 +13,13 @@ namespace DealAndTripApp.ViewModels
     {
         public SignUpPageViewModel()
         {
-            userName = "";
-            firstName = "";
-            lastName = "";
-            email = "";
-            password = "";
-            repeatPassword = "";
-            phoneNumber = "";
+            UserName = "";
+            FirstName = "";
+            LastName = "";
+            Email = "";
+            Password = "";
+            RepeatPassword = "";
+            PhoneNumber = "";
             RegisterCommand = new Command(Register);
         }
 
@@ -27,51 +28,67 @@ namespace DealAndTripApp.ViewModels
             DealAndTripAPIProxy proxy = DealAndTripAPIProxy.CreateProxy();
             try
             {
-                if(repeatPassword != password)
+                bool allValuesVliadted = ValidationAllValues();
+                if (!allValuesVliadted)
                 {
-                    ErrorMessege = "Passwords are not matching";
+                    await App.Current.MainPage.DisplayAlert("Registeration Failed", "Please check all your values are validated", "Okay");
                 }
                 else
                 {
-                    User newUser = new User
+                    bool userNameExist = await proxy.IsUserNameExistAsync(UserName);
+                    bool emailExist = await proxy.IsUserNameExistAsync(Email);
+                    if (userNameExist || emailExist)
                     {
-                        UserName = this.UserName,
-                        FirstName = this.FirstName,
-                        LastName = this.LastName,
-                        Email = this.Email,
-                        Password = this.Password,
-                        PhoneNumber = this.PhoneNumber,
-                    };
-                    bool registered = await proxy.SignUpAsync(newUser);
-                    if (registered)
-                        ErrorMessege = "User created succesfully!";
+                        string error = "";
+                        if (userNameExist)
+                        {
+                            error += "Username ";
+                            if (emailExist)
+                            {
+                                error += "and email are already in use";
+                            }
+                            else
+                            {
+                                error += "is alrady in use";
+                            }
+                        }
+                        else
+                            error += "Email is already in use";
+                        await App.Current.MainPage.DisplayAlert("Registeration Failed", error, "Okay");
+
+                    }
                     else
-                        ErrorMessege = "Something went wrong";
+                    {
+                        User newUser = new User
+                        {
+                            UserName = this.UserName,
+                            FirstName = this.FirstName,
+                            LastName = this.LastName,
+                            Email = this.Email,
+                            Password = this.Password,
+                            PhoneNumber = this.PhoneNumber,
+                        };
+                        bool registered = await proxy.SignUpAsync(newUser);
+                        if (registered)
+                            Login();
+                        else
+                            await App.Current.MainPage.DisplayAlert("Registeration Failed", "Something went wrong", "Okay");
+
+                    }
                 }
             }
             catch (Exception)
             {
-                ErrorMessege = "Something went wrong";
+                await App.Current.MainPage.DisplayAlert("Registeration Failed", "Something went wrong", "Okay");
             }
+        }
+        public async void Login()
+        {
+            LoginPage loginPage = new LoginPage();
+            await App.Current.MainPage.Navigation.PushAsync(loginPage);
         }
         #region properties
-        private string errorMessege;
-        public string ErrorMessege
-        {
-            get
-            {
-                return errorMessege;
-            }
-            set
-            {
-                if (errorMessege != value)
-                {
-                    errorMessege = value;
 
-                    OnPropertyChanged();
-                }
-            }
-        }
         #region UserName
         private string userName;
         public string UserName
@@ -219,7 +236,7 @@ namespace DealAndTripApp.ViewModels
             {
                 if (lastNameErrorMessegeIsVisible != value)
                 {
-                    LastNameErrorMessegeIsVisible = value;
+                    lastNameErrorMessegeIsVisible = value;
                     OnPropertyChanged();
                 }
             }
@@ -532,9 +549,9 @@ namespace DealAndTripApp.ViewModels
         }
         public void PasswordValidation()
         {
-            if (string.IsNullOrEmpty(Password) || UserName.Length < 8)
+            if (string.IsNullOrEmpty(Password) || Password.Length < 8)
             {
-                PasswordErrorMessege = "UserName must have at least 8 letters";
+                PasswordErrorMessege = "The Password must have at least 8 letters";
                 PasswordErrorMessegeIsVisible = true;
             }
             else
@@ -547,6 +564,7 @@ namespace DealAndTripApp.ViewModels
         {
             if(RepeatPassword != Password)
             {
+                RepeatPasswordErrorMessegeIsVisible = true;
                 RepeatPasswordErrorMessege = "The repeated password don't match to the password";
             }
         }
