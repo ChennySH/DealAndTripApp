@@ -35,6 +35,7 @@ namespace DealAndTripApp.ViewModels
                 }
                 else
                 {
+
                     bool userNameExist = await proxy.IsUserNameExistAsync(UserName);
                     bool emailExist = await proxy.IsEmailExistAsync(Email);
                     if (userNameExist || emailExist)
