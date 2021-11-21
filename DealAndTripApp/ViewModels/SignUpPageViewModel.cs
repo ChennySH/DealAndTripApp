@@ -36,7 +36,7 @@ namespace DealAndTripApp.ViewModels
                 else
                 {
                     bool userNameExist = await proxy.IsUserNameExistAsync(UserName);
-                    bool emailExist = await proxy.IsUserNameExistAsync(Email);
+                    bool emailExist = await proxy.IsEmailExistAsync(Email);
                     if (userNameExist || emailExist)
                     {
                         string error = "";
@@ -49,7 +49,7 @@ namespace DealAndTripApp.ViewModels
                             }
                             else
                             {
-                                error += "is alrady in use";
+                                error += "is already in use";
                             }
                         }
                         else
@@ -307,7 +307,8 @@ namespace DealAndTripApp.ViewModels
                 {
                     password = value;
                     OnPropertyChanged();
-                    EmailValidation();
+                    PasswordValidation();
+                    RepeatPasswordValidation();
                 }
             }
         }
@@ -358,6 +359,7 @@ namespace DealAndTripApp.ViewModels
                 {
                     repeatPassword = value;
                     OnPropertyChanged();
+                    RepeatPasswordValidation();
                 }
             }
         }
@@ -408,6 +410,7 @@ namespace DealAndTripApp.ViewModels
                 {
                     phoneNumber = value;
                     OnPropertyChanged();
+                    PhoneNumberValidation();
                 }
             }
         }
@@ -504,7 +507,17 @@ namespace DealAndTripApp.ViewModels
                 PhoneNumberErrorMessege = "Please enter your phone number";
                 PhoneNumberErrorMessegeIsVisible = true;
                 return;
-            }            
+            }
+            for (int i = 2; i < PhoneNumber.Length; i++)
+            {
+                char c = PhoneNumber[i];
+                if (c < '0' || c > '9')
+                {
+                    PhoneNumberErrorMessege = "Phone number must contain valid digits only";
+                    PhoneNumberErrorMessegeIsVisible = true;
+                    return;
+                }
+            }
             if (!PhoneNumber.StartsWith("05"))
             {
                 PhoneNumberErrorMessege = "Phone number must start with the digits 05";
@@ -517,16 +530,7 @@ namespace DealAndTripApp.ViewModels
                 PhoneNumberErrorMessegeIsVisible = true;
                 return;
             }
-            for (int i = 2; i < PhoneNumber.Length; i++)
-            {
-                char c = PhoneNumber[i];
-                if (c < '0' || c > '9')
-                {
-                    PhoneNumberErrorMessege = "Phone number must contain valid digits";
-                    PhoneNumberErrorMessegeIsVisible = true;
-                    return;
-                }
-            }
+            
             PhoneNumberErrorMessege = "";
             PhoneNumberErrorMessegeIsVisible = false;
         }
@@ -538,7 +542,7 @@ namespace DealAndTripApp.ViewModels
                 EmailErrorMessegeIsVisible = true;
                 return;
             }
-            if (Email.Contains("@") && !Email.StartsWith("@") && !Email.EndsWith("@"))
+            if (!(Email.Contains("@") && !Email.StartsWith("@") && !Email.EndsWith("@")))
             {
                 EmailErrorMessege = "Please enter a valid email";
                 EmailErrorMessegeIsVisible = true;
@@ -566,6 +570,11 @@ namespace DealAndTripApp.ViewModels
             {
                 RepeatPasswordErrorMessegeIsVisible = true;
                 RepeatPasswordErrorMessege = "The repeated password don't match to the password";
+            }
+            else
+            {
+                RepeatPasswordErrorMessegeIsVisible = false;
+                RepeatPasswordErrorMessege = "";
             }
         }
         #endregion

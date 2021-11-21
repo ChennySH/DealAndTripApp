@@ -149,8 +149,8 @@ namespace DealAndTripApp.Services
             try
             {
                 string userNameJson = JsonSerializer.Serialize(userName);
-                StringContent userJsonContent = new StringContent(userNameJson, Encoding.UTF8, "application/json");
-                HttpResponseMessage response = await this.client.PostAsync($"{this.baseUri}/IsUserNameExist", userJsonContent);
+                StringContent userNameJsonContent = new StringContent(userNameJson, Encoding.UTF8, "application/json");
+                HttpResponseMessage response = await this.client.PostAsync($"{this.baseUri}/IsUserNameExist", userNameJsonContent);
                 if (response.IsSuccessStatusCode)
                 {
                     JsonSerializerOptions options = new JsonSerializerOptions
@@ -175,8 +175,8 @@ namespace DealAndTripApp.Services
             try
             {
                 string emailJson = JsonSerializer.Serialize(email);
-                StringContent userJsonContent = new StringContent(email, Encoding.UTF8, "application/json");
-                HttpResponseMessage response = await this.client.PostAsync($"{this.baseUri}/IsEmailExist", userJsonContent);
+                StringContent emailJsonContent = new StringContent(email, Encoding.UTF8, "application/json");
+                HttpResponseMessage response = await this.client.PostAsync($"{this.baseUri}/IsEmailExist", emailJsonContent);
                 if (response.IsSuccessStatusCode)
                 {
                     JsonSerializerOptions options = new JsonSerializerOptions

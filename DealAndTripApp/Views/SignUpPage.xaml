@@ -30,7 +30,7 @@
 
 
             <Label Text="Repeat Password: "/>
-            <Entry Placeholder="Repeat Password" Text="{Binding RepeatPassword}"/>
+            <Entry Placeholder="Repeat Password" Text="{Binding RepeatPassword}" IsPassword="True"/>
             <Label Text="{Binding RepeatPasswordErrorMessege}" IsVisible="{Binding RepeatPasswordErrorMessegeIsVisible}" TextColor="Red"/>
 
 
