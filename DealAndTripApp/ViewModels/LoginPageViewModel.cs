@@ -16,6 +16,7 @@ namespace DealAndTripApp.ViewModels
 {
     class LoginPageViewModel : BaseViewModel
     {
+
         public LoginPageViewModel()
         {
             UserNameOrEmail = "";
