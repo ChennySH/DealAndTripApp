@@ -4,6 +4,7 @@
              x:Class="DealAndTripApp.Views.UserHomePage">
   <!--Pages can be added as references or inline-->
   <ContentPage Title="Search Vaction" />
-  <ContentPage Title="Tab 2" />
-  <ContentPage Title="Tab 3" />
+  <ContentPage Title="Questionire" />
+  <ContentPage Title="Status" />
+  <ContentPage Title="BecomeATravelAgent" />
 </TabbedPage>

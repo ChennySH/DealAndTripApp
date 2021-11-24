@@ -5,6 +5,7 @@
              Title="{Binding UserName}">
     <ContentPage.Content>
         <StackLayout>
+            <Button Text="Become a Travel Agent"/>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>
