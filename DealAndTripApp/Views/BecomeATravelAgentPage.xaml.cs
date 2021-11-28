@@ -7,12 +7,12 @@ using System.Threading.Tasks;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
-namespace DealAndTripApp.ViewModels
+namespace DealAndTripApp.Views
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class BecomeATravelAgent : ContentPage
+    public partial class BecomeATravelAgentPage : ContentPage
     {
-        public BecomeATravelAgent()
+        public BecomeATravelAgentPage()
         {
             InitializeComponent();
         }

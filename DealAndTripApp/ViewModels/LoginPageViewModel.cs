@@ -52,7 +52,7 @@ namespace DealAndTripApp.ViewModels
         }
         public async void MoveToHomePage()
         {
-            HomePage homePage = new HomePage();
+            UserHomePage homePage = new UserHomePage();
             await App.Current.MainPage.Navigation.PushAsync(homePage);
         }
         #region Properties
